@@ -51,14 +51,20 @@ type Person = {
                 <div
                 key={i}
                 className="
-                group relative
+                team-card
+                group
+                relative
                 overflow-hidden
+
                 rounded-3xl
                 border border-white/10
                 bg-white/5
                 backdrop-blur-xl
                 p-8
-                transition-all duration-500
+
+                transition-all
+                duration-500
+
                 hover:-translate-y-3
                 hover:border-green-400/40
                 hover:shadow-[0_0_40px_rgba(74,222,128,0.15)]
