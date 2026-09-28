@@ -1,0 +1,23 @@
+name: Relatório SonarQube + Trivy
+
+on:
+  push:
+    branches: [main, stage]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.repository }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  report:
+    if: github.ref_name == 'main' || github.ref_name == 'stage'
+    uses: nexiumcodesp/sonarnexiumcode/.github/workflows/quality-scan.yml@bce68b0edb9425637223718b1ce0d689e269cbfa
+    with:
+      project_key: ${{ github.event.repository.name }}${{ github.ref_name == 'stage' && '-stage' || '' }}
+      enforce: false
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
